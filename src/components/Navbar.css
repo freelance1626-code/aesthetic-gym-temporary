@@ -1,0 +1,222 @@
+/* ============================================================
+   Aesthetic Gym — Navbar (dark energetic theme)
+   ============================================================ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(11, 11, 13, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* More opaque + glow line once scrolled (JS adds .is-scrolled) */
+.navbar.is-scrolled {
+  background: rgba(11, 11, 13, 0.95);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* ---- Logo ---- */
+.navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  flex-shrink: 0;
+  transition: opacity 0.25s ease;
+}
+
+.navbar-logo:hover {
+  opacity: 0.85;
+}
+
+.navbar-logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+  transition: transform 0.3s var(--ease-out);
+}
+
+.navbar-logo:hover .navbar-logo-icon {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.navbar-logo:active .navbar-logo-icon {
+  transform: scale(0.94);
+}
+
+.navbar-logo-text {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.navbar-logo-text strong {
+  color: var(--accent);
+}
+
+/* ---- Nav links ---- */
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar-links a {
+  display: block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+.navbar-links a:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* ---- Hamburger toggle ---- */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.navbar-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hamburger -> X animation */
+.navbar-toggle.is-open .navbar-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggle.is-open .navbar-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.is-open .navbar-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- Tablet (769px – 1024px): compress so 5 links + logo fit ---- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar-container {
+    padding: 0 18px;
+    gap: 16px;
+  }
+
+  .navbar-links {
+    gap: 0;
+  }
+
+  .navbar-links a {
+    padding: 10px 13px;
+    font-size: 12.5px;
+  }
+}
+
+/* ---- Mobile / tablet ---- */
+@media (max-width: 768px) {
+  .navbar-container {
+    height: 64px;
+    padding: 0 18px;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px 18px 24px;
+    background: rgba(11, 11, 13, 0.98);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    max-height: calc(100svh - 64px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar-links.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .navbar-links a {
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
+    color: var(--ink-soft);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-links a:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+}
